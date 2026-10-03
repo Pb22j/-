@@ -1,0 +1,33 @@
+{
+  "name": "baseer-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "بصير — محاكي السوق السعودي (تاسي) للتوعية المالية",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173",
+    "test": "node scripts/test_compliance.mjs && node scripts/test_chat.mjs && node scripts/test_agents.mjs && node scripts/test_market.mjs && node scripts/test_router.mjs && node scripts/test_render.mjs && node scripts/test_footer.mjs",
+    "test:browser": "node scripts/test_browser.mjs",
+    "test:compliance": "node scripts/test_compliance.mjs",
+    "test:chat": "node scripts/test_chat.mjs",
+    "test:footer": "node scripts/test_footer.mjs",
+    "test:agents": "node scripts/test_agents.mjs",
+    "test:market": "node scripts/test_market.mjs",
+    "test:router": "node scripts/test_router.mjs",
+    "test:render": "node scripts/test_render.mjs",
+    "lint:str": "node scripts/lint_str.mjs",
+    "lint:corpus": "node scripts/lint_corpus.mjs",
+    "data": "node -e \"console.log('run from repo root: python scripts/process_data.py')\""
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11"
+  }
+}

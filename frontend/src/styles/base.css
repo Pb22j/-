@@ -1,0 +1,84 @@
+/* Baseer base layer — ported from "Baseer Design System/tokens/base.css"
+   plus the layout + motion primitives used across the app. */
+
+html, body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--f-text);
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  height: 100%;
+}
+* { box-sizing: border-box; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 3px; }
+a { color: var(--blue); text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
+a:hover { color: var(--ink); }
+input::placeholder { color: var(--ink); opacity: .28; }
+
+#root { height: 100%; }
+
+/* ---------- motion (verbatim from the design system) ---------- */
+@keyframes bs-in   { from { opacity: .001; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes bs-pop  { from { opacity: 0; transform: scale(.2); } to { opacity: 1; transform: none; } }
+@keyframes bs-spin { to { transform: rotate(360deg); } }
+@keyframes bs-bar  { from { height: 6px; } to { height: 26px; } }
+@keyframes bs-drop { from { opacity: 0; transform: translateY(-110vh) rotate(-14deg); } to { opacity: 1; transform: none; } }
+@keyframes bs-deal { from { opacity: 0; transform: translateY(-40px) rotate(-6deg); } to { opacity: 1; transform: none; } }
+@keyframes bs-tearL{ to { transform: translate(-22px, 6px) rotate(-7deg); } }
+@keyframes bs-tearR{ to { transform: translate(22px, 10px) rotate(6deg); } }
+@keyframes bs-hype { from { transform: translateY(0) rotate(-6deg); } to { transform: translateY(-8px) rotate(6deg) scale(1.06); } }
+@keyframes bs-shake{ 0%,100% { transform: rotate(0); } 20% { transform: rotate(-3deg) translateX(-3px); } 40% { transform: rotate(3deg) translateX(3px); } 60% { transform: rotate(-2deg); } 80% { transform: rotate(2deg); } }
+@keyframes bs-float{ from { transform: translateY(0) rotate(var(--r, 0deg)); } to { transform: translateY(-10px) rotate(var(--r, 0deg)); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ---------- layout primitives ---------- */
+.bs-screen {
+  flex: 1; min-height: 0;
+  display: flex; flex-direction: column;
+  gap: var(--space-7);
+  padding: var(--space-6) var(--gutter-x) 140px;
+  animation: bs-in var(--dur-enter) var(--ease-enter) both;
+}
+.bs-center {
+  flex: 1; min-height: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  gap: var(--space-7);
+  padding: var(--space-6) var(--gutter-x) 140px;
+  animation: bs-in var(--dur-enter) var(--ease-enter) both;
+}
+.bs-col { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.bs-row { display: flex; align-items: center; justify-content: center; gap: var(--space-5); flex-wrap: wrap; }
+/* Disclaimer — the last thing on every page, centred.
+   NOT position:fixed: a fixed element inside a `filter`ed ancestor (Piece uses
+   --lift) is contained by that ancestor and lands mid-screen over the content. */
+.bs-disclaimer {
+  flex: none;
+  text-align: center;
+  margin: 0;
+  padding: var(--space-4) var(--space-5) var(--space-6);
+  font: var(--type-caption);
+  color: var(--ink-muted);
+  pointer-events: none;
+}
+.bs-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* In-content note inside a stage. Distinct from the page footer:
+   it sits where the stage puts it, so it must not be pinned anywhere. */
+.bs-note {
+  margin: 0;
+  text-align: center;
+  font: var(--type-caption);
+  color: var(--ink-muted);
+  padding: var(--space-2) var(--space-4);
+}
+
+/* utility */
+.num { font-variant-numeric: tabular-nums; }
+.muted { color: var(--ink-muted); }
+.grow { flex: 1; min-height: 0; }
+.scroll { overflow-y: auto; overflow-x: hidden; }
